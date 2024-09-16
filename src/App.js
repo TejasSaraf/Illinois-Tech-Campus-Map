@@ -1,15 +1,20 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import GoogleMap from './components/GoogleMap';
 import LifeOnCampus from "./pages/LifeOnCampus.jsx";
 import ParkingTransportation from "./pages/Parking&Transportation.jsx";
 import Safety from "./pages/Safety&Security.jsx";
 import VisitingCampus from "./pages/VisitingCampus.jsx";
 import SideBar from './components/Sidebar.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 
 function App() {
   return (
     <Router>
+      <div className='container'>
+      <Navbar />
+      </div>
+        
       <div className="main-container">
         <SideBar />
         <main className="content">

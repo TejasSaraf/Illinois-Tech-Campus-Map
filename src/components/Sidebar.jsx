@@ -191,7 +191,7 @@ const SideBar = ({ children }) => {
           <div className="top_section">
             <AnimatePresence>
               {isOpen && (
-                <motion.h1
+                <motion.h2
                   variants={showAnimation}
                   initial="hidden"
                   animate="show"
@@ -199,7 +199,7 @@ const SideBar = ({ children }) => {
                   className="logo"
                 >
                   ILLINOIS TECH
-                </motion.h1>
+                </motion.h2>
               )}
             </AnimatePresence>
 
