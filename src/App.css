@@ -9,7 +9,7 @@
   height: 100vh;
 }
 
-.container{
+.container {
   width: 100vw;
   min-height: 5vh;
   background: #ffffff;
@@ -17,6 +17,11 @@
 
 main {
   flex: 1;
+}
+
+#map {
+  height: 50%;
+  width: 98%;
 }
 
 .title {
@@ -89,13 +94,13 @@ main {
 
 .link:hover {
   border-right: 4px solid white;
-  background: rgb(61, 61, 61);
+  /* background: rgb(61, 61, 61); */
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
 .active {
   border-right: 4px solid white;
-  background: rgb(61, 61, 61);
+  background: rgb(255, 255, 255);
 }
 
 .link_text {

@@ -4,13 +4,13 @@ import './Navbar.css';
 const Navbar = () => {
   return (
     <div id="titlebar">
-      <div id="wrapper" style={{ padding: '4px 10px 0' }}> 
+      <div id="wrapper" style={{ padding: '1px 5px 0px' }}>
         <h1
           style={{
             borderRight: '0px',
             padding: '0',
             margin: '0',
-            display: 'inline',
+            display: 'inline-block',
             fontSize: '26px',
             marginTop: '0',
             marginBottom: '10px',
@@ -18,7 +18,7 @@ const Navbar = () => {
             marginBlockEnd: '1em',
           }}
         >
-         Illinois Tech
+          Illinois Tech
         </h1>
 
         <div className="topright" style={{ pointerEvents: 'all' }}>

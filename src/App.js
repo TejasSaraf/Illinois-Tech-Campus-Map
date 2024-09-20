@@ -1,25 +1,28 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import GoogleMap from './components/GoogleMap';
-import LifeOnCampus from "./pages/LifeOnCampus.jsx";
-import ParkingTransportation from "./pages/Parking&Transportation.jsx";
-import Safety from "./pages/Safety&Security.jsx";
-import VisitingCampus from "./pages/VisitingCampus.jsx";
-import SideBar from './components/Sidebar.jsx';
-import Navbar from './components/Navbar/Navbar.jsx';
+import LifeOnCampus from "./pages/LifeOnCampus";
+import ParkingTransportation from "./pages/Parking&Transportation";
+import Safety from "./pages/Safety&Security";
+import VisitingCampus from "./pages/VisitingCampus";
+import SideBar from './components/Sidebar';
+import Navbar from './components/Navbar/Navbar';
+import { useState } from 'react';
 
 function App() {
+  const [markers, setMarkers] = useState([]);
+
   return (
     <Router>
       <div className='container'>
-      <Navbar />
+        <Navbar />
       </div>
-        
+
       <div className="main-container">
-        <SideBar />
+        <SideBar setMarkers={setMarkers} />
         <main className="content">
           <Routes>
-            <Route path="/" element={<GoogleMap />} />
+            <Route path="/" element={<GoogleMap additionalMarkers={markers} />} />
             <Route path="/LifeOnCampus" element={<LifeOnCampus />} />
             <Route path="/ParkingTransportation" element={<ParkingTransportation />} />
             <Route path="/Safety" element={<Safety />} />
@@ -32,5 +35,3 @@ function App() {
 }
 
 export default App;
-
-
