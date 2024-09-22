@@ -14,19 +14,40 @@ function App() {
 
   return (
     <Router>
-      <div className='container'>
-        <Navbar />
-      </div>
-
       <div className="main-container">
         <SideBar setMarkers={setMarkers} />
         <main className="content">
           <Routes>
-            <Route path="/" element={<GoogleMap additionalMarkers={markers} />} />
-            <Route path="/LifeOnCampus" element={<LifeOnCampus />} />
-            <Route path="/ParkingTransportation" element={<ParkingTransportation />} />
-            <Route path="/Safety" element={<Safety />} />
-            <Route path="/VisitingCampus" element={<VisitingCampus />} />
+            <Route path="/" element={
+              <>
+                <Navbar />
+                <GoogleMap additionalMarkers={markers} />
+              </>
+            } />
+            <Route path="/LifeOnCampus" element={
+              <>
+                <Navbar />
+                <LifeOnCampus />
+              </>
+            } />
+            <Route path="/ParkingTransportation" element={
+              <>
+                <Navbar />
+                <ParkingTransportation />
+              </>
+            } />
+            <Route path="/Safety" element={
+              <>
+                <Navbar />
+                <Safety />
+              </>
+            } />
+            <Route path="/VisitingCampus" element={
+              <>
+                <Navbar />
+                <VisitingCampus />
+              </>
+            } />
           </Routes>
         </main>
       </div>

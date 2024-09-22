@@ -10,9 +10,12 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <title>Illinois Tech</title>
+
+  <!-- Load Google Maps API with both Maps and Places libraries -->
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZReI0InY1irXqcWAXA0E9pDMiRhi5Mf0&loading=async&libraries=maps&v=beta"
-    defer></script>
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZReI0InY1irXqcWAXA0E9pDMiRhi5Mf0&loading=async&libraries=maps&v=beta&libraries=places&callback=initMap"
+  async
+  defer></script>
 </head>
 
 <body>

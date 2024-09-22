@@ -10,7 +10,7 @@
 }
 
 .container {
-  width: 100vw;
+  width: 80vw;
   min-height: 5vh;
   background: #ffffff;
 }
@@ -60,24 +60,7 @@ main {
   display: none;
 }
 
-.search {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-  height: 30px;
-  padding: 10px;
-}
-
-.search input {
-  border: none;
-  margin-left: 10px;
-  border-radius: 5px;
-  background: rgb(238, 238, 238);
-  color: white;
-}
-
 .routes {
-  margin-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 5px;

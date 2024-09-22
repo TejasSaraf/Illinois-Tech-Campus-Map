@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaParking, FaRoute } from "react-icons/fa";
-import { BiSearch } from "react-icons/bi";
 import { LiaUniversitySolid, LiaRestroomSolid } from "react-icons/lia";
 import { IoLibrary, IoBicycleSharp } from "react-icons/io5";
 import { GrUserPolice, GrElevator, GrYoga } from "react-icons/gr";
@@ -41,7 +40,7 @@ const SideBar = ({ setMarkers, children }) => {
 
   // Handle Wellness Center checkbox
   const handleWellnessCenterChange = () => {
-    setWellnessCenterChecked(!wellnessCenterChecked);
+    setWellnessCenterChecked(wellnessCenterChecked);
     if (!wellnessCenterChecked) {
       // Pass marker coordinates when checked
       setMarkers([{ position: { lat: 41.83131, lng: -87.62709 }, title: "Wellness Center" }]);
@@ -332,23 +331,6 @@ const SideBar = ({ setMarkers, children }) => {
       // Remove the specific marker when unchecked
       setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Public Safety"));
     }
-  };
-
-  const inputAnimation = {
-    hidden: {
-      width: 0,
-      padding: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    show: {
-      width: "140px",
-      padding: "5px 15px",
-      transition: {
-        duration: 0.2,
-      },
-    },
   };
 
   const routes = [
@@ -651,7 +633,7 @@ const SideBar = ({ setMarkers, children }) => {
       <div className="main-container">
         <motion.div
           animate={{
-            width: isOpen ? "200px" : "45px",
+            width: isOpen ? "250px" : "45px",
 
             transition: {
               duration: 0.5,
@@ -679,23 +661,6 @@ const SideBar = ({ setMarkers, children }) => {
             <div className="bars">
               <FaBars onClick={toggle} />
             </div>
-          </div>
-          <div className="search">
-            <div className="search_icon">
-              <BiSearch />
-            </div>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.input
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  variants={inputAnimation}
-                  type="text"
-                  placeholder="Search"
-                />
-              )}
-            </AnimatePresence>
           </div>
           <section className="routes">
             {routes.map((route, index) => {
