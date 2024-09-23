@@ -11,11 +11,11 @@ import { RiGameFill } from "react-icons/ri";
 import { TbParkingCircle } from "react-icons/tb";
 import { FaTrainSubway } from "react-icons/fa6";
 import { IoIosBus } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SideBarMenu";
 
-const SideBar = ({ setMarkers, children }) => {
+const SideBar = ({ children, setMarkers }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -39,22 +39,20 @@ const SideBar = ({ setMarkers, children }) => {
   const [publicSafetyChecked, setPublicSafetyChecked] = useState(false);
 
   // Handle Wellness Center checkbox
-  const handleWellnessCenterChange = () => {
-    setWellnessCenterChecked(wellnessCenterChecked);
-    if (!wellnessCenterChecked) {
-      // Pass marker coordinates when checked
+  useEffect(() => {
+    if (wellnessCenterChecked) {
       setMarkers([{ position: { lat: 41.83131, lng: -87.62709 }, title: "Wellness Center" }]);
     } else {
-      // Remove marker when unchecked
-      setMarkers([]);
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [wellnessCenterChecked, setMarkers]);
+
+  const handleWellnessCenterChange = (e) => {
+    setWellnessCenterChecked(e.target.checked);
   };
 
-  const handlePublicRestroomsChange = () => {
-    setPublicRestroomsChecked(!publicRestroomsChecked);
-
-    if (!publicRestroomsChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (publicRestroomsChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83130, lng: -87.62748 }, title: "Restroom" },
         { position: { lat: 41.83261, lng: -87.62707 }, title: "Restroom" },
@@ -67,83 +65,88 @@ const SideBar = ({ setMarkers, children }) => {
         { position: { lat: 41.83927, lng: -87.62532 }, title: "Restroom" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Restroom"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [publicRestroomsChecked, setMarkers]);
+
+  const handlePublicRestroomsChange = (e) => {
+    setPublicRestroomsChecked(e.target.checked);
   };
 
-
-  const handleLibraryChange = () => {
-    setlibraryChecked(!libraryChecked);
-    if (!libraryChecked) {
-      // Pass marker coordinates when checked
+  useEffect(() => {
+    if (libraryChecked) {
       setMarkers([{ position: { lat: 41.83399, lng: -87.62650 }, title: "Library" }]);
     } else {
-      // Remove marker when unchecked
-      setMarkers([]);
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [libraryChecked, setMarkers]);
+
+  const handleLibraryChange = (e) => {
+    setlibraryChecked(e.target.checked);
   };
 
-  const handleManOnBenchChange = () => {
-    setManOnBenchCheckedChecked(!manOnBenchChecked);
-    if (!manOnBenchChecked) {
-      // Pass marker coordinates when checked
+  useEffect(() => {
+    if (manOnBenchChecked) {
       setMarkers([{ position: { lat: 41.83555, lng: -87.62713 }, title: "Library" }]);
     } else {
-      // Remove marker when unchecked
-      setMarkers([]);
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [manOnBenchChecked, setMarkers]);
+
+  const handleManOnBenchChange = (e) => {
+    setManOnBenchCheckedChecked(e.target.checked);
   };
 
-  const handleGymChange = () => {
-    setGymChecked(!gymChecked);
-    if (!gymChecked) {
-      // Pass marker coordinates when checked
+  useEffect(() => {
+    if (gymChecked) {
       setMarkers([{ position: { lat: 41.83904, lng: -87.62560 }, title: "Gym" }]);
     } else {
-      // Remove marker when unchecked
-      setMarkers([]);
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [gymChecked, setMarkers]);
+
+  const handleGymChange = (e) => {
+    setGymChecked(e.target.checked);
   };
 
-  const handleEateriesChange = () => {
-    setEateriesChecked(!eateriesChecked);
-    if (!eateriesChecked) {
-      // Pass marker coordinates when checked
+  useEffect(() => {
+    if (eateriesChecked) {
       setMarkers([{ position: { lat: 41.83602, lng: -87.62551 }, title: "Eateries" }]);
     } else {
-      // Remove marker when unchecked
-      setMarkers([]);
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [eateriesChecked, setMarkers]);
+
+  const handleEateriesChange = (e) => {
+    setEateriesChecked(e.target.checked);
   };
 
-  const handleAtheleticsChange = () => {
-    setAtheleticsChecked(!atheleticsChecked);
-    if (!atheleticsChecked) {
-      // Pass marker coordinates when checked
+  useEffect(() => {
+    if (atheleticsChecked) {
       setMarkers([{ position: { lat: 41.83902, lng: -87.62538 }, title: "Atheletics" }]);
     } else {
-      // Remove marker when unchecked
-      setMarkers([]);
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [atheleticsChecked, setMarkers]);
+
+  const handleAtheleticsChange = (e) => {
+    setAtheleticsChecked(e.target.checked);
   };
 
-  const handleBogChange = () => {
-    setBogChecked(!bogChecked);
-    if (!bogChecked) {
-      // Pass marker coordinates when checked
+  useEffect(() => {
+    if (bogChecked) {
       setMarkers([{ position: { lat: 41.83536, lng: -87.62827 }, title: "The Bog" }]);
     } else {
-      // Remove marker when unchecked
-      setMarkers([]);
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [bogChecked, setMarkers]);
+
+  const handleBogChange = (e) => {
+    setBogChecked(e.target.checked);
   };
 
-  const handleAccessibleEnteranceChange = () => {
-    setEnteranceChecked(!enteranceChecked);
-
-    if (!enteranceChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (enteranceChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83901, lng: -87.62534 }, title: "Accessible Enterance" },
         { position: { lat: 41.83799, lng: -87.62475 }, title: "Accessible Enterance" },
@@ -159,16 +162,16 @@ const SideBar = ({ setMarkers, children }) => {
         { position: { lat: 41.83363, lng: -87.62390 }, title: "Accessible Enterance" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Accessible Enterance"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [enteranceChecked, setMarkers]);
+
+  const handleAccessibleEnteranceChange = (e) => {
+    setEnteranceChecked(e.target.checked);
   };
 
-  const handlepowerOperatedDoorsChange = () => {
-    setPowerOperatedDoorsChecked(!powerOperatedDoorsChecked);
-
-    if (!powerOperatedDoorsChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (powerOperatedDoorsChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83857, lng: -87.62739 }, title: "Power Operated Door" },
         { position: { lat: 41.83792, lng: -87.62778 }, title: "Power Operated Door" },
@@ -192,32 +195,32 @@ const SideBar = ({ setMarkers, children }) => {
         { position: { lat: 41.83127, lng: -87.62754 }, title: "Power Operated Door" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Power Operated Door"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [powerOperatedDoorsChecked, setMarkers]);
+
+  const handlepowerOperatedDoorsChange = (e) => {
+    setPowerOperatedDoorsChecked(e.target.checked);
   };
 
-  const handleElevatorChange = () => {
-    setElevatorChecked(!elevatorChecked);
-
-    if (!elevatorChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (elevatorChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83341, lng: -87.62706 }, title: "Elevator/Lift" },
         { position: { lat: 41.83146, lng: -87.62724 }, title: "Elevator/Lift" },
         { position: { lat: 41.83865, lng: -87.62537 }, title: "Elevator/Lift" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Elevator/Lift"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [elevatorChecked, setMarkers]);
+
+  const handleElevatorChange = (e) => {
+    setElevatorChecked(e.target.checked);
   };
 
-  const handleParkingChange = () => {
-    setParkingChecked(!parkingChecked);
-
-    if (!parkingChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (parkingChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83903, lng: -87.62624 }, title: "Parking" },
         { position: { lat: 41.83778, lng: -87.62628 }, title: "Parking" },
@@ -231,16 +234,16 @@ const SideBar = ({ setMarkers, children }) => {
         { position: { lat: 41.83258, lng: -87.62613 }, title: "Parking" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Parking"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [parkingChecked, setMarkers]);
+
+  const handleParkingChange = (e) => {
+    setParkingChecked(e.target.checked);
   };
 
-  const handleaccessibleParkingChange = () => {
-    setAccessibleParkingChecked(!accessibleParkingChecked);
-
-    if (!accessibleParkingChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (accessibleParkingChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83847, lng: -87.62640 }, title: "Accessible Parking" },
         { position: { lat: 41.83770, lng: -87.62523 }, title: "Accessible Parking" },
@@ -262,16 +265,16 @@ const SideBar = ({ setMarkers, children }) => {
         { position: { lat: 41.83128, lng: -87.62619 }, title: "Accessible Parking" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Accessible Parking"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [accessibleParkingChecked, setMarkers]);
+
+  const handleaccessibleParkingChange = (e) => {
+    setAccessibleParkingChecked(e.target.checked);
   };
 
-  const handlebathroomChange = () => {
-    setBathroomChecked(!bathroomChecked);
-
-    if (!bathroomChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (bathroomChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83931, lng: -87.62535 }, title: "Single Occupant Bathroom" },
         { position: { lat: 41.83777, lng: -87.62778 }, title: "Single Occupant Bathroom" },
@@ -284,53 +287,56 @@ const SideBar = ({ setMarkers, children }) => {
         { position: { lat: 41.83128, lng: -87.62736 }, title: "Single Occupant Bathroom" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Single Occupant Bathroom"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [bathroomChecked, setMarkers]);
+
+  const handlebathroomChange = (e) => {
+    setBathroomChecked(e.target.checked);
   };
 
-  const handleCTAChange = () => {
-    setCTAChecked(!ctaChecked);
-
-    if (!ctaChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (ctaChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83123, lng: -87.62953 }, title: "CTA" },
         { position: { lat: 41.83201, lng: -87.62591 }, title: "CTA" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "CTA"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [ctaChecked, setMarkers]);
+
+  const handleCTAChange = (e) => {
+    setCTAChecked(e.target.checked);
   };
 
-  const handleDivvyChange = () => {
-    setDivvyChecked(!divvyChecked);
-
-    if (!divvyChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (divvyChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83473, lng: -87.62572 }, title: "Divvy Stands" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Divvy Stands"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [divvyChecked, setMarkers]);
+
+  const handleDivvyChange = (e) => {
+    setDivvyChecked(e.target.checked);
   };
 
-  const handlePublicSafetyChange = () => {
-    setPublicSafetyChecked(!publicSafetyChecked);
-
-    if (!publicSafetyChecked) {
-      // Append new marker when checked
+  useEffect(() => {
+    if (publicSafetyChecked) {
       setMarkers((prevMarkers) => [
         { position: { lat: 41.83601, lng: -87.62804 }, title: "Public Safety" },
         { position: { lat: 41.83374, lng: -87.62800 }, title: "Public Safety" }
       ]);
     } else {
-      // Remove the specific marker when unchecked
-      setMarkers((prevMarkers) => prevMarkers.filter(marker => marker.title !== "Public Safety"));
+      setMarkers([]); // Clear markers when unchecked
     }
+  }, [publicSafetyChecked, setMarkers]);
+
+  const handlePublicSafetyChange = (e) => {
+    setPublicSafetyChecked(e.target.checked);
   };
 
   const routes = [
@@ -351,6 +357,7 @@ const SideBar = ({ setMarkers, children }) => {
                 type="checkbox"
                 checked={wellnessCenterChecked}
                 onChange={handleWellnessCenterChange}
+                autoComplete="off"
               />
               <MdLocalHospital />
             </>
@@ -376,7 +383,7 @@ const SideBar = ({ setMarkers, children }) => {
               <input
                 type="checkbox"
                 checked={manOnBenchChecked}
-                onChange={handleManOnBenchChange}
+                onClick={handleManOnBenchChange}
               />
               <GrYoga />
             </>
@@ -475,7 +482,7 @@ const SideBar = ({ setMarkers, children }) => {
             <>
               <input
                 type="checkbox"
-                checked={eateriesChecked}
+                checked={enteranceChecked}
                 onChange={handleAccessibleEnteranceChange}
               />
               <GiEntryDoor />
@@ -535,7 +542,7 @@ const SideBar = ({ setMarkers, children }) => {
           ),
         },
         {
-          name: "Single Occupant Bathroom",
+          name: "Single-Bathroom",
           icon: (
             <>
               <input
@@ -599,7 +606,7 @@ const SideBar = ({ setMarkers, children }) => {
         },
         {
           path: "/settings/Suggested Travel Routes",
-          name: "Suggested Travel Routes",
+          name: "Suggested Routes",
           icon: (
             <>
               <input type="checkbox" />
@@ -629,82 +636,76 @@ const SideBar = ({ setMarkers, children }) => {
   };
 
   return (
-    <>
-      <div className="main-container">
-        <motion.div
-          animate={{
-            width: isOpen ? "250px" : "45px",
+    <div className="main-container">
+      <motion.div
+        animate={{
+          width: isOpen ? "250px" : "45px",
+          transition: { duration: 0.5, type: "spring", damping: 10 },
+        }}
+        className="sidebar"
+      >
+        <div className="top_section">
+          <AnimatePresence>
+            {isOpen && (
+              <motion.h2
+                variants={showAnimation}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                className="logo"
+              >
+                ILLINOIS TECH
+              </motion.h2>
+            )}
+          </AnimatePresence>
 
-            transition: {
-              duration: 0.5,
-              type: "spring",
-              damping: 10,
-            },
-          }}
-          className={`sidebar `}
-        >
-          <div className="top_section">
-            <AnimatePresence>
-              {isOpen && (
-                <motion.h2
-                  variants={showAnimation}
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  className="logo"
-                >
-                  ILLINOIS TECH
-                </motion.h2>
-              )}
-            </AnimatePresence>
-
-            <div className="bars">
-              <FaBars onClick={toggle} />
-            </div>
+          <div className="bars" onClick={toggle}>
+            <FaBars />
           </div>
-          <section className="routes">
-            {routes.map((route, index) => {
-              if (route.subRoutes) {
-                return (
-                  <SidebarMenu
-                    setIsOpen={setIsOpen}
-                    route={route}
-                    showAnimation={showAnimation}
-                    isOpen={isOpen}
-                  />
-                );
-              }
+        </div>
 
+        <section className="routes">
+          {routes.map((route, index) => {
+            if (route.subRoutes) {
               return (
-                <NavLink
-                  to={route.path}
+                <SidebarMenu
                   key={index}
-                  className="link"
-                  activeClassName="active"
-                >
-                  <div className="icon">{route.icon}</div>
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        variants={showAnimation}
-                        initial="hidden"
-                        animate="show"
-                        exit="hidden"
-                        className="link_text"
-                      >
-                        {route.name}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </NavLink>
+                  setIsOpen={setIsOpen}
+                  route={route}
+                  showAnimation={showAnimation}
+                  isOpen={isOpen}
+                />
               );
-            })}
-          </section>
-        </motion.div>
+            }
 
-        <main>{children}</main>
-      </div>
-    </>
+            return (
+              <NavLink
+                to={route.path}
+                key={index}
+                className={({ isActive }) => (isActive ? "link active" : "link")}
+              >
+                <div className="icon">{route.icon}</div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      variants={showAnimation}
+                      initial="hidden"
+                      animate="show"
+                      exit="hidden"
+                      className="link_text"
+                    >
+                      {route.name}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </NavLink>
+            );
+          })}
+        </section>
+      </motion.div>
+
+      <main>{children}</main>
+    </div>
   );
 };
 

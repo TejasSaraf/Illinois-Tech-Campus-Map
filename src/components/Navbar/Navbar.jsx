@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from "react";
 import './Navbar.css';
 
 const Navbar = () => {
+  const [showContainer, setShowContainer] = useState(false);
+
+  // Function to toggle the state
+  const toggleContainer = () => {
+    setShowContainer(!showContainer);
+  };
   return (
     <div id="titlebar">
       <div id="wrapper" style={{ padding: '1px 5px 0px' }}>
@@ -34,15 +40,52 @@ const Navbar = () => {
             <span className="conditionaldisplay">Student </span>Login
           </a>
 
-          <button id="selfTourBlock" title="Virtual Visitor Tour">
+          <button id="selfTourBlock" title="Virtual Visitor Tour" onClick={toggleContainer}>
             <img
-              src=".\assets\images\camera.png"
+              src="./assets/images/camera.png"
               width="23"
               height="23"
               alt="Virtual Visitor Tour"
               title="Virtual Visitor Tour"
             />
           </button>
+
+          {showContainer && (
+            <div
+              style={{
+                width: "30%",
+                height: "52%",
+                backgroundColor: "white",
+                border: "2px solid #edecec",
+                position: "absolute",
+                zIndex: 1000,
+                top: "50px", // Adjust as necessary
+                right: "10px",
+              }}
+            >
+              <div className="popover fade bottom in" role="tooltip" id="popover768090">
+                <div className="arrow"></div>
+                <h3 className="popover-title">Virtual Visitor Tour</h3>
+                <div className="popover-content">
+                  <div className="col-sm-12">
+                    <img src="./assets/images/campus.jpg" className="img-responsive" alt="Main Quad" />
+                  </div>
+                  <div className="col-sm-12">
+                    <button
+                      id="campus_tour_button"
+                      type="button" // Use "button" type instead of "submit" if no form is involved
+                      className="btn btn-primary"
+                      onClick={() => window.location.href = "https://www.iit.edu/admissions-aid/visit-and-tour/virtual-tour"}
+                    >
+                      Let's Get Started!
+                    </button>
+
+                  </div>
+                  <div className="col-sm-12">&nbsp;</div>
+                </div>
+              </div>
+            </div>
+          )}
 
           <button id="relativeLinkBlock" title="Related Websites">
             <img
