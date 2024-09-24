@@ -1,13 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './Navbar.css';
 
 const Navbar = () => {
-  const [showContainer, setShowContainer] = useState(false);
+  const [showContainer, setShowContainer] = useState(false); // Retaining showContainer
+  const [showAerialView, setShowAerialView] = useState(false); // New state for showing the aerial view
+  const [videoSrc, setVideoSrc] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const videoRef = useRef(null);
 
-  // Function to toggle the state
-  const toggleContainer = () => {
-    setShowContainer(!showContainer);
+  const PARAMETER_VALUE = 'Chicago, IL 60616';
+
+  const videoIdOrAddress = (value) => {
+    const videoIdRegex = /[0-9a-zA-Z-_]{22}/;
+    return value.match(videoIdRegex) ? 'videoId' : 'address';
   };
+
+  useEffect(() => {
+    const initAerialView = async () => {
+      if (videoSrc) return; // Avoid re-fetching if videoSrc already exists
+
+      const parameterKey = videoIdOrAddress(PARAMETER_VALUE);
+      const urlParameter = new URLSearchParams();
+      urlParameter.set(parameterKey, PARAMETER_VALUE);
+
+      try {
+        const response = await fetch(
+          `https://aerialview.googleapis.com/v1/videos:lookupVideo?key=AIzaSyAZReI0InY1irXqcWAXA0E9pDMiRhi5Mf0&${urlParameter.toString()}`
+        );
+        const videoResult = await response.json();
+
+        if (videoResult.state === 'PROCESSING') {
+          setErrorMessage('Video still processing..');
+        } else if (videoResult.error && videoResult.error.code === 404) {
+          setErrorMessage(
+            'Video not found. To generate video for an address, call on Aerial view renderVideo method.'
+          );
+        } else if (videoResult.uris && videoResult.uris.MP4_HIGH) {
+          setVideoSrc(videoResult.uris.MP4_HIGH.portraitUri);
+        } else {
+          setErrorMessage('Unexpected response structure from server.');
+        }
+      } catch (error) {
+        setErrorMessage('An error occurred while fetching the video.');
+      }
+    };
+
+    if (showAerialView) {
+      initAerialView();
+    }
+  }, [showAerialView, videoSrc]);
+
+  const handleVideoClick = () => {
+    const video = videoRef.current;
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
+
+  // Function to toggle aerial view visibility when "relativeLinkBlock" is clicked
+  const toggleAerialView = () => {
+    setShowAerialView(!showAerialView);
+  };
+
   return (
     <div id="titlebar">
       <div id="wrapper" style={{ padding: '1px 5px 0px' }}>
@@ -40,7 +96,7 @@ const Navbar = () => {
             <span className="conditionaldisplay">Student </span>Login
           </a>
 
-          <button id="selfTourBlock" title="Virtual Visitor Tour" onClick={toggleContainer}>
+          <button id="selfTourBlock" title="Virtual Visitor Tour" onClick={() => setShowContainer(!showContainer)}>
             <img
               src="./assets/images/camera.png"
               width="23"
@@ -59,7 +115,7 @@ const Navbar = () => {
                 border: "2px solid #edecec",
                 position: "absolute",
                 zIndex: 1000,
-                top: "50px", // Adjust as necessary
+                top: "50px",
                 right: "10px",
               }}
             >
@@ -73,13 +129,12 @@ const Navbar = () => {
                   <div className="col-sm-12">
                     <button
                       id="campus_tour_button"
-                      type="button" // Use "button" type instead of "submit" if no form is involved
+                      type="button"
                       className="btn btn-primary"
                       onClick={() => window.location.href = "https://www.iit.edu/admissions-aid/visit-and-tour/virtual-tour"}
                     >
                       Let's Get Started!
                     </button>
-
                   </div>
                   <div className="col-sm-12">&nbsp;</div>
                 </div>
@@ -87,7 +142,8 @@ const Navbar = () => {
             </div>
           )}
 
-          <button id="relativeLinkBlock" title="Related Websites">
+          {/* Button to trigger aerial view */}
+          <button id="relativeLinkBlock" title="Related Websites" onClick={toggleAerialView}>
             <img
               src=".\assets\images\relative_link_g1.png"
               width="23"
@@ -124,9 +180,32 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+
+      {/* Aerial View Container */}
+      {showAerialView && (
+        <div
+          style={{
+            position: 'fixed', // Changed to 'fixed' to make sure it stays visible while scrolling
+            top: '100px',
+            right: '50px',
+            height: '300px',
+            backgroundColor: 'white',
+            zIndex: 1000,
+            border: '2px solid #ccc',
+            padding: '10px',
+          }}
+        >
+          <h3>Aerial View</h3>
+          {errorMessage && <p>{errorMessage}</p>}
+          {videoSrc ? (
+            <video ref={videoRef} src={videoSrc} controls onClick={handleVideoClick} style={{ width: '100%', height: '80%' }} />
+          ) : (
+            <p>Loading aerial view...</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
 export default Navbar;
-

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const GoogleMap = ({ additionalMarkers, aerialView }) => {
+const GoogleMap = ({ additionalMarkers }) => {
   const markersRef = useRef([]);
   const mapRef = useRef(null);
   const inputRef = useRef(null); // Ref for the search input
@@ -9,7 +9,7 @@ const GoogleMap = ({ additionalMarkers, aerialView }) => {
     // Initialize map function
     const initMap = () => {
       const center = { lat: 41.83530, lng: -87.62300 };
-      const marker =  { lat: 41.83673, lng: -87.62597 };
+      const marker = { lat: 41.83673, lng: -87.62597 };
       const mapElement = document.getElementById('map');
 
       if (mapElement) {
@@ -97,60 +97,6 @@ const GoogleMap = ({ additionalMarkers, aerialView }) => {
     }
   }, [additionalMarkers]); // Update markers whenever `additionalMarkers` changes
 
-  useEffect(() => {
-    // Update additional markers
-    if (mapRef.current && additionalMarkers) {
-      markersRef.current.forEach(marker => marker.setMap(null)); // Clear existing markers
-      markersRef.current = []; // Reset markers array
-
-      additionalMarkers.forEach((marker) => {
-        const newMarker = new window.google.maps.Marker({
-          position: marker.position,
-          map: mapRef.current,
-          title: marker.title || "Marker",
-        });
-        markersRef.current.push(newMarker); // Store new marker
-      });
-    }
-  }, [additionalMarkers]); 
-
-// const PARAMETER_VALUE = '1600 Amphitheatre Parkway, Mountain View, CA 94043';
-// const API_KEY = 'INSERT_YOUR_API_KEY';
-
-// async function initAerialView() {
-//   const displayEl = document.querySelector('video');
-//   displayEl.addEventListener('click', function () {
-//     if (displayEl.paused) {
-//       displayEl.play();
-//     } else {
-//       displayEl.pause();
-//     }
-//   });
-
-//   // Parameter key can accept either 'videoId' or 'address' depending on input.
-//   const parameterKey = videoIdOrAddress(PARAMETER_VALUE);
-//   const urlParameter = new URLSearchParams();
-//   urlParameter.set(parameterKey, PARAMETER_VALUE);
-//   urlParameter.set('key', API_KEY);
-//   const response = await fetch(`https://aerialview.googleapis.com/v1/videos:lookupVideo?${urlParameter.toString()}`);
-//   const videoResult = await response.json();
-
-//   if (videoResult.state === 'PROCESSING') {
-//     alert('Video still processing..');
-//   } else if (videoResult.error && videoResult.error.code === 404) {
-//     alert('Video not found. To generate video for an address, call on Aerial view renderVideo method.');
-//   } else {
-//     displayEl.src = videoResult.uris.MP4_MEDIUM.landscapeUri
-//   }
-// }
-
-// function videoIdOrAddress(value) {
-//   const videoIdRegex = /[0-9a-zA-Z-_]{22}/;
-//   return value.match(videoIdRegex) ? 'videoId' : 'address';
-// }
-
-// initAerialView();
-  
   return (
     <div>
       <input
