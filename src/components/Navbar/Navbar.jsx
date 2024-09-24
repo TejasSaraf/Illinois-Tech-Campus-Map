@@ -25,7 +25,7 @@ const Navbar = () => {
 
       try {
         const response = await fetch(
-          `https://aerialview.googleapis.com/v1/videos:lookupVideo?key=YourAPIKey&${urlParameter.toString()}`
+          `https://aerialview.googleapis.com/v1/videos:lookupVideo?key=AIzaSyAZReI0InY1irXqcWAXA0E9pDMiRhi5Mf0&${urlParameter.toString()}`
         );
         const videoResult = await response.json();
 
