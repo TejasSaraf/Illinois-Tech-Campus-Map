@@ -26,21 +26,12 @@ a {
     font-size: larger;
 }
 
-h3{
-    padding: 8px 14px;
-    margin: 0;
-    font-size: 14px;
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #ebebeb;
-    color: black;
-}
-
-.img-responsive{
+.img-responsive {
     width: 100%;
     padding: 10px 30px 10px 30px;
 }
 
-#campus_tour_button{
+#campus_tour_button {
     background: #CC0000;
     width: 30%;
     display: flex;

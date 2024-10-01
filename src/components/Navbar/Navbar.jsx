@@ -188,14 +188,11 @@ const Navbar = () => {
             position: 'fixed', // Changed to 'fixed' to make sure it stays visible while scrolling
             top: '100px',
             right: '50px',
-            height: '300px',
-            backgroundColor: 'white',
+            height: '500px',
             zIndex: 1000,
-            border: '2px solid #ccc',
             padding: '10px',
           }}
         >
-          <h3>Aerial View</h3>
           {errorMessage && <p>{errorMessage}</p>}
           {videoSrc ? (
             <video ref={videoRef} src={videoSrc} controls onClick={handleVideoClick} style={{ width: '100%', height: '80%' }} />

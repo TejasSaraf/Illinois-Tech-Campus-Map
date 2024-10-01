@@ -83,7 +83,8 @@ const GoogleMap = ({ additionalMarkers }) => {
   useEffect(() => {
     // Update additional markers
     if (mapRef.current && additionalMarkers) {
-      markersRef.current.forEach(marker => marker.setMap(null)); // Clear existing markers
+      // Clear existing markers
+      markersRef.current.forEach(marker => marker.setMap(null));
       markersRef.current = []; // Reset markers array
 
       additionalMarkers.forEach((marker) => {
@@ -91,11 +92,12 @@ const GoogleMap = ({ additionalMarkers }) => {
           position: marker.position,
           map: mapRef.current,
           title: marker.title || "Marker",
+          icon: marker.icon,
         });
         markersRef.current.push(newMarker); // Store new marker
       });
     }
-  }, [additionalMarkers]); // Update markers whenever `additionalMarkers` changes
+  }, [additionalMarkers]); // Update markers whenever `additionalMarkers` changes  
 
   return (
     <div>
