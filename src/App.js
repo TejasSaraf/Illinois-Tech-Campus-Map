@@ -14,57 +14,27 @@ function App() {
 
   return (
     <Router>
+      <Navbar />
       <div className="main-container">
-        <SideBar setMarkers={setMarkers} />
-        <main className="content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="content">
+                <div className="sidebar-container">
+                  <SideBar setMarkers={setMarkers} />
+                </div>
+                <div className="google-map-container">
                   <GoogleMap additionalMarkers={markers} />
-                </>
-              }
-            />
-            <Route
-              path="/LifeOnCampus"
-              element={
-                <>
-                  <Navbar />
-                  <LifeOnCampus />
-                </>
-              }
-            />
-            <Route
-              path="/ParkingTransportation"
-              element={
-                <>
-                  <Navbar />
-                  <ParkingTransportation />
-                </>
-              }
-            />
-            <Route
-              path="/Safety"
-              element={
-                <>
-                  <Navbar />
-                  <Safety />
-                </>
-              }
-            />
-            <Route
-              path="/VisitingCampus"
-              element={
-                <>
-                  <Navbar />
-                  <VisitingCampus />
-                </>
-              }
-            />
-          </Routes>
-        </main>
+                </div>
+              </div>
+            }
+          />
+          <Route path="/LifeOnCampus" element={<LifeOnCampus />} />
+          <Route path="/ParkingTransportation" element={<ParkingTransportation />} />
+          <Route path="/Safety" element={<Safety />} />
+          <Route path="/VisitingCampus" element={<VisitingCampus />} />
+        </Routes>
       </div>
     </Router>
   );

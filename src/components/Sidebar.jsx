@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaParking, FaRoute } from "react-icons/fa";
-import { LiaUniversitySolid, LiaRestroomSolid } from "react-icons/lia";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBuildingColumns, faBus, faTree } from '@fortawesome/free-solid-svg-icons';
+import { LiaRestroomSolid } from "react-icons/lia";
 import { IoLibrary, IoBicycleSharp } from "react-icons/io5";
 import { GrUserPolice, GrElevator, GrYoga } from "react-icons/gr";
 import { ImSpoonKnife } from "react-icons/im";
-import { GiHighGrass, GiEntryDoor } from "react-icons/gi";
+import { GiEntryDoor } from "react-icons/gi";
 import {
   MdLocalHospital,
   MdOutlineSportsGymnastics,
@@ -16,7 +18,6 @@ import { CgGym } from "react-icons/cg";
 import { RiGameFill } from "react-icons/ri";
 import { TbParkingCircle } from "react-icons/tb";
 import { FaTrainSubway } from "react-icons/fa6";
-import { IoIosBus } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SideBarMenu";
@@ -968,7 +969,7 @@ const SideBar = ({ children, setMarkers }) => {
       name: "VisitingCampus",
       icon: (
         <>
-          <LiaUniversitySolid />
+          <FontAwesomeIcon icon={faBuildingColumns} />
         </>
       ),
       subRoutes: [
@@ -1032,7 +1033,7 @@ const SideBar = ({ children, setMarkers }) => {
       name: "LifeOnCampus",
       icon: (
         <>
-          <GiHighGrass />
+          <FontAwesomeIcon icon={faTree} />
         </>
       ),
       subRoutes: [
@@ -1095,7 +1096,7 @@ const SideBar = ({ children, setMarkers }) => {
       name: "ParkingTransportation",
       icon: (
         <>
-          <IoIosBus />
+          <FontAwesomeIcon icon={faBus} />
         </>
       ),
       subRoutes: [

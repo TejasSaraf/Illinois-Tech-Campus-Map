@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
+/* global google */
 
 const GoogleMap = ({ additionalMarkers }) => {
   const markersRef = useRef([]);
   const mapRef = useRef(null);
-  const inputRef = useRef(null); // Ref for the search input
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    // Initialize map function
     const initMap = () => {
       const center = { lat: 41.8353, lng: -87.623 };
       const marker = { lat: 41.83673, lng: -87.62597 };
@@ -16,16 +16,19 @@ const GoogleMap = ({ additionalMarkers }) => {
         mapRef.current = new window.google.maps.Map(mapElement, {
           center: center,
           zoom: 16,
+          mapTypeControl: true,
+          mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_RIGHT,
+          },
         });
 
-        // Create initial marker
         new window.google.maps.Marker({
           position: marker,
           map: mapRef.current,
           title: "Chicago Location",
         });
 
-        // Initialize search box
         const searchBox = new window.google.maps.places.SearchBox(
           inputRef.current
         );
@@ -66,32 +69,27 @@ const GoogleMap = ({ additionalMarkers }) => {
           mapRef.current.fitBounds(bounds);
         });
 
-        // Cleanup function
         return () => {
-          markersRef.current.forEach((marker) => marker.setMap(null)); // Cleanup existing markers
-          searchMarkers.forEach((marker) => marker.setMap(null)); // Cleanup search markers
+          markersRef.current.forEach((marker) => marker.setMap(null));
+          searchMarkers.forEach((marker) => marker.setMap(null));
           mapRef.current.controls[
             window.google.maps.ControlPosition.TOP_LEFT
-          ].pop(); // Remove the search box
+          ].pop();
         };
       }
     };
 
-    // Ensure initMap is globally accessible
     window.initMap = initMap;
 
-    // Check if Google Maps API is ready
     if (window.google && window.google.maps) {
       initMap();
     }
-  }, []); // Initialize map only once
+  }, []);
 
   useEffect(() => {
-    // Update additional markers
     if (mapRef.current && additionalMarkers) {
-      // Clear existing markers
       markersRef.current.forEach((marker) => marker.setMap(null));
-      markersRef.current = []; // Reset markers array
+      markersRef.current = [];
 
       additionalMarkers.forEach((marker) => {
         const newMarker = new window.google.maps.Marker({
@@ -100,10 +98,10 @@ const GoogleMap = ({ additionalMarkers }) => {
           title: marker.title || "Marker",
           icon: marker.icon,
         });
-        markersRef.current.push(newMarker); // Store new marker
+        markersRef.current.push(newMarker);
       });
     }
-  }, [additionalMarkers]); // Update markers whenever `additionalMarkers` changes
+  }, [additionalMarkers]);
 
   return (
     <div>
@@ -118,6 +116,7 @@ const GoogleMap = ({ additionalMarkers }) => {
           borderRadius: "4px",
           padding: "4px",
           border: "white",
+          marginLeft: "8%",
         }}
       />
       <div id="map" style={{ width: "100%", height: "600px" }}></div>

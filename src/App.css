@@ -15,13 +15,22 @@
   background: #ffffff;
 }
 
-main {
-  flex: 1;
+.content {
+  flex-grow: 1; /* The map will take up the remaining space */
+  position: relative;
 }
 
-#map {
-  height: 50%;
-  width: 98%;
+.sidebar-container {
+  position: absolute;
+  z-index: 10;
+  pointer-events: all;
+}
+
+.google-map-container {
+  width: 100%;
+  height: calc(100% - 30px);
+  position: relative;
+  overflow: hidden;
 }
 
 .title {
