@@ -5,7 +5,13 @@ import { IoLibrary, IoBicycleSharp } from "react-icons/io5";
 import { GrUserPolice, GrElevator, GrYoga } from "react-icons/gr";
 import { ImSpoonKnife } from "react-icons/im";
 import { GiHighGrass, GiEntryDoor } from "react-icons/gi";
-import { MdLocalHospital, MdOutlineSportsGymnastics, MdDoorSliding, MdDirectionsCar, MdOutlineBathroom } from "react-icons/md";
+import {
+  MdLocalHospital,
+  MdOutlineSportsGymnastics,
+  MdDoorSliding,
+  MdDirectionsCar,
+  MdOutlineBathroom,
+} from "react-icons/md";
 import { CgGym } from "react-icons/cg";
 import { RiGameFill } from "react-icons/ri";
 import { TbParkingCircle } from "react-icons/tb";
@@ -25,14 +31,13 @@ const accessibleParkingIcon = `${process.env.PUBLIC_URL}/assets/images/accessibl
 const divvyIcon = `${process.env.PUBLIC_URL}/assets/images/bike-station-list2.png`;
 const manOnBenchIcon = `${process.env.PUBLIC_URL}/assets/images/manOnBench.png`;
 const gymIcon = `${process.env.PUBLIC_URL}/assets/images/sports-round_4.png`;
-const atheleticsIcon = `${process.env.PUBLIC_URL}/assets/images/sports-round_4.png`;
-const bogIcon = `${process.env.PUBLIC_URL}/assets/images/bog.png`;
+const atheleticsIcon = `${process.env.PUBLIC_URL}/assets/images/athletics-list_3.png`;
+const bogIcon = `${process.env.PUBLIC_URL}/assets/images/services-list_2.png`;
 const elevatorIcon = `${process.env.PUBLIC_URL}/assets/images/Elevator.png`;
 const powerOperatedDoorsIcon = `${process.env.PUBLIC_URL}/assets/images/door-round.png`;
-const singleBathroomIcon = `${process.env.PUBLIC_URL}/assets/images/wellness.png`;
-const ctaIcon = `${process.env.PUBLIC_URL}/assets/images/bus_stop_small.png`;
+const singleBathroomIcon = `${process.env.PUBLIC_URL}/assets/images/gender-neutral-list.png`;
+const ctaIcon = `${process.env.PUBLIC_URL}/assets/images/shuttle.png`;
 const publicSafetyIcon = `${process.env.PUBLIC_URL}/assets/images/car-round.png`;
-
 
 const SideBar = ({ children, setMarkers }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,169 +53,176 @@ const SideBar = ({ children, setMarkers }) => {
   const [atheleticsChecked, setAtheleticsChecked] = useState(false);
   const [bogChecked, setBogChecked] = useState(false);
   const [enteranceChecked, setEnteranceChecked] = useState(false);
-  const [powerOperatedDoorsChecked, setPowerOperatedDoorsChecked] = useState(false);
+  const [powerOperatedDoorsChecked, setPowerOperatedDoorsChecked] =
+    useState(false);
   const [elevatorChecked, setElevatorChecked] = useState(false);
   const [parkingChecked, setParkingChecked] = useState(false);
-  const [accessibleParkingChecked, setAccessibleParkingChecked] = useState(false);
+  const [accessibleParkingChecked, setAccessibleParkingChecked] =
+    useState(false);
   const [bathroomChecked, setBathroomChecked] = useState(false);
   const [ctaChecked, setCTAChecked] = useState(false);
   const [divvyChecked, setDivvyChecked] = useState(false);
   const [publicSafetyChecked, setPublicSafetyChecked] = useState(false);
 
   useEffect(() => {
+    const updatedMarkers = [];
+
     if (wellnessCenterChecked) {
-      setMarkers([{
-        position: { lat: 41.83131, lng: -87.62709 }, title: "Wellness Center",
+      updatedMarkers.push({
+        position: { lat: 41.83131, lng: -87.62709 },
+        title: "Wellness Center",
         icon: {
           url: wellnessCenterIcon,
           scaledSize: new window.google.maps.Size(30, 30),
         },
-      }]);
-    } else {
-      setMarkers([]);
+      });
     }
-  }, [wellnessCenterChecked, setMarkers]);
 
-  const handleWellnessCenterChange = (e) => {
-    setWellnessCenterChecked(e.target.checked);
-  };
-
-  useEffect(() => {
-    if (publicRestroomsChecked) {
-      setMarkers((prevMarkers) => [
-        { position: { lat: 41.83130, lng: -87.62748 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83261, lng: -87.62707 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83523, lng: -87.62863 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83590, lng: -87.62614 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83564, lng: -87.62427 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83661, lng: -87.62800 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83644, lng: -87.62437 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83777, lng: -87.62773 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-        { position: { lat: 41.83927, lng: -87.62532 }, title: "Restroom", icon: { url: publicRestroomIcon, scaledSize: new window.google.maps.Size(30, 30) } },
-      ]);
-    } else {
-      setMarkers([]);
-    }
-  }, [publicRestroomsChecked, setMarkers]);
-
-  const handlePublicRestroomsChange = (e) => {
-    setPublicRestroomsChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (libraryChecked) {
-      setMarkers([
-        {
-          position: { lat: 41.83399, lng: -87.62650 },
-          title: "Library",
-          icon: {
-            url: libraryIcon,
-            scaledSize: new window.google.maps.Size(30, 30),
-          },
+      updatedMarkers.push({
+        position: { lat: 41.83399, lng: -87.6265 },
+        title: "Library",
+        icon: {
+          url: libraryIcon,
+          scaledSize: new window.google.maps.Size(30, 30),
         },
-      ]);
-    } else {
-      setMarkers([]);
+      });
     }
-  }, [libraryChecked, setMarkers]);
 
-  const handleLibraryChange = (e) => {
-    setlibraryChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (manOnBenchChecked) {
-      setMarkers([{
-        position: { lat: 41.83555, lng: -87.62713 }, title: "Man On Bench",
+      updatedMarkers.push({
+        position: { lat: 41.83555, lng: -87.62713 },
+        title: "Man On Bench",
         icon: {
           url: manOnBenchIcon,
           scaledSize: new window.google.maps.Size(30, 30),
         },
-      }]);
-    } else {
-      setMarkers([]);
+      });
     }
-  }, [manOnBenchChecked, setMarkers]);
 
-  const handleManOnBenchChange = (e) => {
-    setManOnBenchCheckedChecked(e.target.checked);
-  };
+    if (publicRestroomsChecked) {
+      updatedMarkers.push(
+        {
+          position: { lat: 41.8313, lng: -87.62748 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.83261, lng: -87.62707 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.83523, lng: -87.62863 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.8359, lng: -87.62614 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.83564, lng: -87.62427 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.83661, lng: -87.628 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.83644, lng: -87.62437 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.83777, lng: -87.62773 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        },
+        {
+          position: { lat: 41.83927, lng: -87.62532 },
+          title: "Restroom",
+          icon: {
+            url: publicRestroomIcon,
+            scaledSize: new window.google.maps.Size(15, 15),
+          },
+        }
+      );
+    }
 
-  useEffect(() => {
     if (gymChecked) {
-      setMarkers([{
-        position: { lat: 41.83904, lng: -87.62560 }, title: "Gym",
+      updatedMarkers.push({
+        position: { lat: 41.83904, lng: -87.6256 },
+        title: "Gym",
         icon: {
           url: gymIcon,
           scaledSize: new window.google.maps.Size(30, 30),
         },
-      }]);
-    } else {
-      setMarkers([]);
+      });
     }
-  }, [gymChecked, setMarkers]);
 
-  const handleGymChange = (e) => {
-    setGymChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (eateriesChecked) {
-      setMarkers([{
-        position: { lat: 41.83602, lng: -87.62551 }, title: "Eateries",
+      updatedMarkers.push({
+        position: { lat: 41.83602, lng: -87.62551 },
+        title: "Eateries",
         icon: {
           url: eateriesIcon,
           scaledSize: new window.google.maps.Size(30, 30),
         },
-      }]);
-    } else {
-      setMarkers([]);
+      });
     }
-  }, [eateriesChecked, setMarkers]);
 
-  const handleEateriesChange = (e) => {
-    setEateriesChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (atheleticsChecked) {
-      setMarkers([{
-        position: { lat: 41.83902, lng: -87.62538 }, title: "Atheletics",
+      updatedMarkers.push({
+        position: { lat: 41.83902, lng: -87.62538 },
+        title: "Athletics",
         icon: {
           url: atheleticsIcon,
           scaledSize: new window.google.maps.Size(30, 30),
         },
-      }]);
-    } else {
-      setMarkers([]);
+      });
     }
-  }, [atheleticsChecked, setMarkers]);
 
-  const handleAtheleticsChange = (e) => {
-    setAtheleticsChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (bogChecked) {
-      setMarkers([{
-        position: { lat: 41.83536, lng: -87.62827 }, title: "The Bog",
+      updatedMarkers.push({
+        position: { lat: 41.83536, lng: -87.62827 },
+        title: "The Bog",
         icon: {
           url: bogIcon,
           scaledSize: new window.google.maps.Size(30, 30),
         },
-      }]);
-    } else {
-      setMarkers([]);
+      });
     }
-  }, [bogChecked, setMarkers]);
 
-  const handleBogChange = (e) => {
-    setBogChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (enteranceChecked) {
-      setMarkers((prevMarkers) => [
+      updatedMarkers.push(
         {
           position: { lat: 41.83901, lng: -87.62534 },
           title: "Accessible Entrance",
@@ -252,7 +264,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83969, lng: -87.62870 },
+          position: { lat: 41.83969, lng: -87.6287 },
           title: "Accessible Entrance",
           icon: {
             url: enteranceIcon,
@@ -292,7 +304,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83430, lng: -87.62384 },
+          position: { lat: 41.8343, lng: -87.62384 },
           title: "Accessible Entrance",
           icon: {
             url: enteranceIcon,
@@ -300,34 +312,18 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83363, lng: -87.62390 },
+          position: { lat: 41.83363, lng: -87.6239 },
           title: "Accessible Entrance",
           icon: {
             url: enteranceIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
-        },
-      ]);
-    } else {
-      setMarkers([]);
+        }
+      );
     }
-  }, [enteranceChecked, setMarkers]);
 
-  const handleAccessibleEnteranceChange = (e) => {
-    setEnteranceChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (powerOperatedDoorsChecked) {
-      setMarkers((prevMarkers) => [
-        {
-          position: { lat: 41.83857, lng: -87.62739 },
-          title: "Power Operated Door",
-          icon: {
-            url: powerOperatedDoorsIcon,
-            scaledSize: new window.google.maps.Size(30, 30),
-          },
-        },
+      updatedMarkers.push(
         {
           position: { lat: 41.83792, lng: -87.62778 },
           title: "Power Operated Door",
@@ -369,7 +365,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83600, lng: -87.62808 },
+          position: { lat: 41.836, lng: -87.62808 },
           title: "Power Operated Door",
           icon: {
             url: powerOperatedDoorsIcon,
@@ -433,7 +429,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83371, lng: -87.62630 },
+          position: { lat: 41.83371, lng: -87.6263 },
           title: "Power Operated Door",
           icon: {
             url: powerOperatedDoorsIcon,
@@ -479,54 +475,41 @@ const SideBar = ({ children, setMarkers }) => {
             url: powerOperatedDoorsIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
-        },
-      ]);
-    } else {
-      setMarkers([]);
+        }
+      );
     }
-  }, [powerOperatedDoorsChecked, setMarkers]);
 
-  const handlepowerOperatedDoorsChange = (e) => {
-    setPowerOperatedDoorsChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (elevatorChecked) {
-      setMarkers((prevMarkers) => [
+      updatedMarkers.push(
         {
-          position: { lat: 41.83341, lng: -87.62706 }, title: "Elevator/Lift",
+          position: { lat: 41.83341, lng: -87.62706 },
+          title: "Elevator/Lift",
           icon: {
             url: elevatorIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
         },
         {
-          position: { lat: 41.83146, lng: -87.62724 }, title: "Elevator/Lift",
+          position: { lat: 41.83146, lng: -87.62724 },
+          title: "Elevator/Lift",
           icon: {
             url: elevatorIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
         },
         {
-          position: { lat: 41.83865, lng: -87.62537 }, title: "Elevator/Lift",
+          position: { lat: 41.83865, lng: -87.62537 },
+          title: "Elevator/Lift",
           icon: {
             url: elevatorIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
-        },
-      ]);
-    } else {
-      setMarkers([]);
+        }
+      );
     }
-  }, [elevatorChecked, setMarkers]);
 
-  const handleElevatorChange = (e) => {
-    setElevatorChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (parkingChecked) {
-      setMarkers((prevMarkers) => [
+      updatedMarkers.push(
         {
           position: { lat: 41.83903, lng: -87.62624 },
           title: "Parking",
@@ -552,7 +535,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83625, lng: -87.62390 },
+          position: { lat: 41.83625, lng: -87.6239 },
           title: "Parking",
           icon: {
             url: parkingIcon,
@@ -606,22 +589,14 @@ const SideBar = ({ children, setMarkers }) => {
             url: parkingIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
-        },
-      ]);
-    } else {
-      setMarkers([]);
+        }
+      );
     }
-  }, [parkingChecked, setMarkers]);
 
-  const handleParkingChange = (e) => {
-    setParkingChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (accessibleParkingChecked) {
-      setMarkers((prevMarkers) => [
+      updatedMarkers.push(
         {
-          position: { lat: 41.83847, lng: -87.62640 },
+          position: { lat: 41.83847, lng: -87.6264 },
           title: "Accessible Parking",
           icon: {
             url: accessibleParkingIcon,
@@ -629,7 +604,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83770, lng: -87.62523 },
+          position: { lat: 41.8377, lng: -87.62523 },
           title: "Accessible Parking",
           icon: {
             url: accessibleParkingIcon,
@@ -637,7 +612,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83730, lng: -87.62527 },
+          position: { lat: 41.8373, lng: -87.62527 },
           title: "Accessible Parking",
           icon: {
             url: accessibleParkingIcon,
@@ -733,7 +708,7 @@ const SideBar = ({ children, setMarkers }) => {
           },
         },
         {
-          position: { lat: 41.83298, lng: -87.62880 },
+          position: { lat: 41.83298, lng: -87.6288 },
           title: "Accessible Parking",
           icon: {
             url: accessibleParkingIcon,
@@ -763,20 +738,12 @@ const SideBar = ({ children, setMarkers }) => {
             url: accessibleParkingIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
-        },
-      ]);
-    } else {
-      setMarkers([]);
+        }
+      );
     }
-  }, [accessibleParkingChecked, setMarkers]);
 
-  const handleaccessibleParkingChange = (e) => {
-    setAccessibleParkingChecked(e.target.checked);
-  };
-
-  useEffect(() => {
     if (bathroomChecked) {
-      setMarkers((prevMarkers) => [
+      updatedMarkers.push(
         {
           position: { lat: 41.83931, lng: -87.62535 },
           title: "Single Occupant Bathroom",
@@ -848,86 +815,148 @@ const SideBar = ({ children, setMarkers }) => {
             url: singleBathroomIcon,
             scaledSize: new window.google.maps.Size(30, 30),
           },
-        },
-      ]);
-    } else {
-      setMarkers([]);
+        }
+      );
     }
-  }, [bathroomChecked, setMarkers]);
+
+    if (ctaChecked) {
+      updatedMarkers.push(
+        {
+          position: { lat: 41.83123, lng: -87.62953 },
+          title: "CTA",
+          icon: {
+            url: ctaIcon,
+            scaledSize: new window.google.maps.Size(30, 30),
+          },
+        },
+        {
+          position: { lat: 41.83201, lng: -87.62591 },
+          title: "CTA",
+          icon: {
+            url: ctaIcon,
+            scaledSize: new window.google.maps.Size(30, 30),
+          },
+        }
+      );
+    }
+
+    if (divvyChecked) {
+      updatedMarkers.push({
+        position: { lat: 41.83473, lng: -87.62572 },
+        title: "Divvy Stands",
+        icon: {
+          url: divvyIcon,
+          scaledSize: new window.google.maps.Size(30, 30),
+        },
+      });
+    }
+
+    if (publicSafetyChecked) {
+      updatedMarkers.push(
+        {
+          position: { lat: 41.83601, lng: -87.62804 },
+          title: "Public Safety",
+          icon: {
+            url: publicSafetyIcon,
+            scaledSize: new window.google.maps.Size(30, 30),
+          },
+        },
+        {
+          position: { lat: 41.83374, lng: -87.628 },
+          title: "Public Safety",
+          icon: {
+            url: publicSafetyIcon,
+            scaledSize: new window.google.maps.Size(30, 30),
+          },
+        }
+      );
+    }
+
+    setMarkers(updatedMarkers);
+  }, [
+    wellnessCenterChecked,
+    libraryChecked,
+    bogChecked,
+    atheleticsChecked,
+    manOnBenchChecked,
+    publicRestroomsChecked,
+    gymChecked,
+    eateriesChecked,
+    enteranceChecked,
+    powerOperatedDoorsChecked,
+    elevatorChecked,
+    parkingChecked,
+    accessibleParkingChecked,
+    bathroomChecked,
+    ctaChecked,
+    divvyChecked,
+    publicSafetyChecked,
+    setMarkers,
+  ]);
+
+  const handleWellnessCenterChange = (e) => {
+    setWellnessCenterChecked(!wellnessCenterChecked);
+  };
+
+  const handlePublicRestroomsChange = (e) => {
+    setPublicRestroomsChecked(e.target.checked);
+  };
+
+  const handleLibraryChange = (e) => {
+    setlibraryChecked(e.target.checked);
+  };
+
+  const handleManOnBenchChange = (e) => {
+    setManOnBenchCheckedChecked(e.target.checked);
+  };
+
+  const handleGymChange = (e) => {
+    setGymChecked(e.target.checked);
+  };
+
+  const handleEateriesChange = (e) => {
+    setEateriesChecked(e.target.checked);
+  };
+
+  const handleAtheleticsChange = (e) => {
+    setAtheleticsChecked(e.target.checked);
+  };
+
+  const handleBogChange = (e) => {
+    setBogChecked(e.target.checked);
+  };
+
+  const handleAccessibleEnteranceChange = (e) => {
+    setEnteranceChecked(e.target.checked);
+  };
+
+  const handlepowerOperatedDoorsChange = (e) => {
+    setPowerOperatedDoorsChecked(e.target.checked);
+  };
+
+  const handleElevatorChange = (e) => {
+    setElevatorChecked(e.target.checked);
+  };
+
+  const handleParkingChange = (e) => {
+    setParkingChecked(e.target.checked);
+  };
+
+  const handleaccessibleParkingChange = (e) => {
+    setAccessibleParkingChecked(e.target.checked);
+  };
 
   const handlebathroomChange = (e) => {
     setBathroomChecked(e.target.checked);
   };
 
-  useEffect(() => {
-    if (ctaChecked) {
-      setMarkers((prevMarkers) => [
-        {
-          position: { lat: 41.83123, lng: -87.62953 }, title: "CTA",
-          icon: {
-            url: ctaIcon,
-            scaledSize: new window.google.maps.Size(30, 30),
-          },
-        },
-        {
-          position: { lat: 41.83201, lng: -87.62591 }, title: "CTA",
-          icon: {
-            url: ctaIcon,
-            scaledSize: new window.google.maps.Size(30, 30),
-          },
-        }
-      ]);
-    } else {
-      setMarkers([]);
-    }
-  }, [ctaChecked, setMarkers]);
-
   const handleCTAChange = (e) => {
     setCTAChecked(e.target.checked);
   };
 
-  useEffect(() => {
-    if (divvyChecked) {
-      setMarkers((prevMarkers) => [
-        {
-          position: { lat: 41.83473, lng: -87.62572 }, title: "Divvy Stands",
-          icon: {
-            url: divvyIcon,
-            scaledSize: new window.google.maps.Size(30, 30),
-          },
-        }
-      ]);
-    } else {
-      setMarkers([]);
-    }
-  }, [divvyChecked, setMarkers]);
-
   const handleDivvyChange = (e) => {
     setDivvyChecked(e.target.checked);
   };
-
-  useEffect(() => {
-    if (publicSafetyChecked) {
-      setMarkers((prevMarkers) => [
-        {
-          position: { lat: 41.83601, lng: -87.62804 }, title: "Public Safety",
-          icon: {
-            url: publicSafetyIcon,
-            scaledSize: new window.google.maps.Size(30, 30),
-          },
-        },
-        {
-          position: { lat: 41.83374, lng: -87.62800 }, title: "Public Safety",
-          icon: {
-            url: publicSafetyIcon,
-            scaledSize: new window.google.maps.Size(30, 30),
-          },
-        }
-      ]);
-    } else {
-      setMarkers([]);
-    }
-  }, [publicSafetyChecked, setMarkers]);
 
   const handlePublicSafetyChange = (e) => {
     setPublicSafetyChecked(e.target.checked);
@@ -977,7 +1006,7 @@ const SideBar = ({ children, setMarkers }) => {
               <input
                 type="checkbox"
                 checked={manOnBenchChecked}
-                onClick={handleManOnBenchChange}
+                onChange={handleManOnBenchChange}
               />
               <GrYoga />
             </>
@@ -1276,7 +1305,9 @@ const SideBar = ({ children, setMarkers }) => {
               <NavLink
                 to={route.path}
                 key={index}
-                className={({ isActive }) => (isActive ? "link active" : "link")}
+                className={({ isActive }) =>
+                  isActive ? "link active" : "link"
+                }
               >
                 <div className="icon">{route.icon}</div>
                 <AnimatePresence>

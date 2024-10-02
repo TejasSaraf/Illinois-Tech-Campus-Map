@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 const GoogleMap = ({ additionalMarkers }) => {
   const markersRef = useRef([]);
@@ -8,9 +8,9 @@ const GoogleMap = ({ additionalMarkers }) => {
   useEffect(() => {
     // Initialize map function
     const initMap = () => {
-      const center = { lat: 41.83530, lng: -87.62300 };
+      const center = { lat: 41.8353, lng: -87.623 };
       const marker = { lat: 41.83673, lng: -87.62597 };
-      const mapElement = document.getElementById('map');
+      const mapElement = document.getElementById("map");
 
       if (mapElement) {
         mapRef.current = new window.google.maps.Map(mapElement, {
@@ -26,8 +26,12 @@ const GoogleMap = ({ additionalMarkers }) => {
         });
 
         // Initialize search box
-        const searchBox = new window.google.maps.places.SearchBox(inputRef.current);
-        mapRef.current.controls[window.google.maps.ControlPosition.TOP_LEFT].push(inputRef.current);
+        const searchBox = new window.google.maps.places.SearchBox(
+          inputRef.current
+        );
+        mapRef.current.controls[
+          window.google.maps.ControlPosition.TOP_LEFT
+        ].push(inputRef.current);
 
         mapRef.current.addListener("bounds_changed", () => {
           searchBox.setBounds(mapRef.current.getBounds());
@@ -38,11 +42,11 @@ const GoogleMap = ({ additionalMarkers }) => {
           const places = searchBox.getPlaces();
           if (places.length === 0) return;
 
-          searchMarkers.forEach(marker => marker.setMap(null));
+          searchMarkers.forEach((marker) => marker.setMap(null));
           searchMarkers = [];
 
           const bounds = new window.google.maps.LatLngBounds();
-          places.forEach(place => {
+          places.forEach((place) => {
             if (!place.geometry || !place.geometry.location) return;
 
             const searchMarker = new window.google.maps.Marker({
@@ -64,9 +68,11 @@ const GoogleMap = ({ additionalMarkers }) => {
 
         // Cleanup function
         return () => {
-          markersRef.current.forEach(marker => marker.setMap(null)); // Cleanup existing markers
-          searchMarkers.forEach(marker => marker.setMap(null)); // Cleanup search markers
-          mapRef.current.controls[window.google.maps.ControlPosition.TOP_LEFT].pop(); // Remove the search box
+          markersRef.current.forEach((marker) => marker.setMap(null)); // Cleanup existing markers
+          searchMarkers.forEach((marker) => marker.setMap(null)); // Cleanup search markers
+          mapRef.current.controls[
+            window.google.maps.ControlPosition.TOP_LEFT
+          ].pop(); // Remove the search box
         };
       }
     };
@@ -84,7 +90,7 @@ const GoogleMap = ({ additionalMarkers }) => {
     // Update additional markers
     if (mapRef.current && additionalMarkers) {
       // Clear existing markers
-      markersRef.current.forEach(marker => marker.setMap(null));
+      markersRef.current.forEach((marker) => marker.setMap(null));
       markersRef.current = []; // Reset markers array
 
       additionalMarkers.forEach((marker) => {
@@ -97,7 +103,7 @@ const GoogleMap = ({ additionalMarkers }) => {
         markersRef.current.push(newMarker); // Store new marker
       });
     }
-  }, [additionalMarkers]); // Update markers whenever `additionalMarkers` changes  
+  }, [additionalMarkers]); // Update markers whenever `additionalMarkers` changes
 
   return (
     <div>
@@ -106,15 +112,15 @@ const GoogleMap = ({ additionalMarkers }) => {
         type="text"
         placeholder="Search Box"
         style={{
-          margin: '10px',
-          color: 'rgb(1, 1, 59)',
-          height: '25px',
-          borderRadius: '4px',
-          padding: '4px',
-          border: 'white'
+          margin: "10px",
+          color: "rgb(1, 1, 59)",
+          height: "25px",
+          borderRadius: "4px",
+          padding: "4px",
+          border: "white",
         }}
       />
-      <div id="map" style={{ width: '100%', height: '600px' }}></div>
+      <div id="map" style={{ width: "100%", height: "600px" }}></div>
     </div>
   );
 };
