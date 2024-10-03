@@ -8,7 +8,7 @@ const GoogleMap = ({ additionalMarkers }) => {
 
   useEffect(() => {
     const initMap = () => {
-      const center = { lat: 41.8353, lng: -87.623 };
+      const center = { lat: 41.8353, lng: -87.626 };
       const marker = { lat: 41.83673, lng: -87.62597 };
       const mapElement = document.getElementById("map");
 
@@ -19,7 +19,7 @@ const GoogleMap = ({ additionalMarkers }) => {
           mapTypeControl: true,
           mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.TOP_RIGHT,
+            position: google.maps.ControlPosition.BOTTOM_RIGHT,
           },
         });
 
@@ -109,6 +109,7 @@ const GoogleMap = ({ additionalMarkers }) => {
         ref={inputRef}
         type="text"
         placeholder="Search Box"
+         className="custom-input"
         style={{
           margin: "10px",
           color: "rgb(1, 1, 59)",
@@ -116,10 +117,10 @@ const GoogleMap = ({ additionalMarkers }) => {
           borderRadius: "4px",
           padding: "4px",
           border: "white",
-          marginLeft: "8%",
+          marginLeft: "12%",
         }}
       />
-      <div id="map" style={{ width: "100%", height: "600px" }}></div>
+      <div id="map" style={{ width: "100%", height: "100%", position: "absolute" }}></div>
     </div>
   );
 };

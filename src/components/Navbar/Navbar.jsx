@@ -111,18 +111,7 @@ const Navbar = () => {
           </button>
 
           {showContainer && (
-            <div
-              style={{
-                width: "30%",
-                height: "52%",
-                backgroundColor: "white",
-                border: "2px solid #edecec",
-                position: "absolute",
-                zIndex: 1000,
-                top: "50px",
-                right: "10px",
-              }}
-            >
+            <div className="virtualTourContainer">
               <div
                 className="popover fade bottom in"
                 role="tooltip"
